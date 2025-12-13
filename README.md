@@ -1,154 +1,113 @@
-🛡️ MahaKavach
-Real-Time Crowd & Safety Intelligence Platform
+# MahaKavach – Real-Time Safety Intelligence Platform
 
-What if public transport could see danger before it happens?
+MahaKavach is a real-time crowd and safety intelligence platform designed for high-density public transport systems.  
+It uses computer vision, real-time streaming, and AI-assisted reporting to provide live crowd visibility, safety risk signals, and emergency workflows.
 
-MahaKavach is an experimental, real-time safety intelligence system built for extreme crowd density environments like the Mumbai Suburban Railway.
-It transforms live crowd movement into actionable safety signals — before incidents escalate.
+The project focuses on **end-to-end system design** rather than UI polish, simulating how large-scale safety systems operate in real-world conditions.
 
-This project is not a mobile app.
-It is a distributed real-time system combining computer vision, streaming, and AI-driven decision logic.
+---
 
-🚨 The Problem
+## Problem
 
-Mumbai local trains carry ~80 lakh passengers daily — yet:
+High-density transport systems operate without:
+- Real-time coach-level crowd visibility
+- Predictive indicators for safety risks
+- Instant, structured emergency reporting
 
-No real-time visibility into coach or platform crowding
+Crowd conditions change every minute, but safety systems react too late.
 
-No predictive signals for women’s safety risk
+---
 
-Emergency response depends on delayed, manual reporting
+## Solution
 
-Crowds are dynamic. Safety systems are static.
-That gap costs time — and sometimes lives.
+MahaKavach treats crowd movement as a **live data stream** and converts it into actionable safety intelligence using real-time pipelines and AI models.
 
-💡 The Idea
+---
 
-MahaKavach treats crowd density as a live data stream, not a static statistic.
+## Core Features
 
-Instead of asking “what happened?”, it asks:
+- **Live Crowd Density Monitoring**  
+  Computer vision-based people counting with coach-level density estimation.
 
-Where is crowd pressure building right now?
+- **Real-Time Dashboard**  
+  WebSocket-powered dashboard showing live crowd heatmaps and train metadata.
 
-Which coach is safest to board?
+- **Women’s Safety Risk Scoring**  
+  Rule-based risk indicators using time, crowd density, and historical patterns.
 
-Which situations require immediate intervention?
+- **Panic & Emergency Alerts**  
+  One-tap panic flow with train, coach, and location context.
 
-⚙️ What MahaKavach Does
+- **AI Voice Complaint System (Prototype)**  
+  Converts short voice inputs into structured incident reports.
 
-Live Crowd Intelligence
-Computer vision detects people count and density at coach level and streams updates every few seconds.
+- **Offline-First Design**  
+  Supports limited functionality during low or no connectivity.
 
-Real-Time Safety Dashboard
-An interactive map visualizes trains, stations, and crowd heatmaps using low-latency WebSockets.
+---
 
-Women’s Safety Risk Scoring
-A rule-based + data-driven risk score estimates safety levels based on time, density, and historical patterns.
+## Architecture Overview
 
-Panic & Emergency Flow
-One-tap panic actions broadcast train, coach, and location metadata instantly.
-
-AI Voice Complaints (Prototype)
-Short voice inputs are converted into structured incident reports using speech-to-text and LLMs.
-
-Offline-First Design
-The system continues to function inside tunnels using cached state and background sync.
-
-🧠 System Philosophy
-
-Event-driven, not request-driven
-
-Streaming over polling
-
-Real-time > perfect accuracy
-
-Prototype realism over mock demos
-
-This project prioritizes architecture clarity and scalability thinking over cosmetic features.
-
-🏗️ High-Level Architecture
-Video Feed / Dataset
-        ↓
-YOLO-based Crowd Detection
-        ↓
-Crowd Density Aggregation
-        ↓
+Video Input / Dataset
+↓
+YOLO Crowd Detection
+↓
+Density Aggregation
+↓
 FastAPI WebSocket Server
-        ↓
-React Real-Time Dashboard (PWA)
+↓
+React Real-Time Dashboard
 
 
-Each layer is intentionally decoupled to reflect production-grade system design.
+Each layer is decoupled to reflect production-style system design.
 
-🧰 Tech Stack
+---
 
-Frontend
+## Tech Stack
 
-React + Vite
+**Frontend**
+- React + Vite
+- Tailwind CSS
+- MapLibre GL
+- Progressive Web App (PWA)
 
-Tailwind CSS
+**Backend**
+- FastAPI (Python)
+- Native WebSockets
 
-MapLibre GL
+**ML / AI**
+- YOLO-based people detection
+- Crowd density estimation
+- Whisper + LLM (prototype)
 
-PWA (offline-first)
+**Data**
+- PostgreSQL (Supabase – free tier)
+- In-memory real-time state
 
-Backend
+---
 
-FastAPI (async)
+## Project Status
 
-Native WebSockets
-
-ML / AI
-
-YOLO-based people detection
-
-Density estimation logic
-
-Whisper + LLM (prototype)
-
-Data
-
-PostgreSQL (Supabase – free tier)
-
-In-memory streaming state
-
-Dev
-
-GitHub-based monorepo
-
-CI/CD ready structure
-
-🚧 Project Status
-
-MVP under active development
+🚧 **MVP in active development**
 
 Current focus:
+- Real-time WebSocket pipeline
+- Live crowd heatmap rendering
+- End-to-end data flow validation
 
-Real-time WebSocket pipeline
+---
 
-Live crowd heatmap rendering
+## Purpose
 
-End-to-end data flow correctness
+This project was built to:
+- Demonstrate real-time system design
+- Combine AI with streaming architectures
+- Simulate safety-critical data pipelines
+- Serve as a high-quality engineering portfolio project
 
-This is a working system, not a UI mock.
+---
 
-🎯 Why This Project Exists
+## Disclaimer
 
-MahaKavach was built to:
-
-Explore real-time system design at scale
-
-Combine AI with streaming architectures
-
-Simulate safety-critical decision pipelines
-
-Demonstrate engineering depth beyond CRUD apps
-
-It is designed as a learning + portfolio system, not a commercial product.
-
-👨‍💻 Author
-
-Built with an engineering-first mindset — focusing on clarity, trade-offs, and execution.
-
-If you’re reviewing this repo as an interviewer:
-Feel free to dive into the architecture, not just the UI.
+This is a **prototype and learning project**.  
+No real passenger data or live surveillance feeds are used.
