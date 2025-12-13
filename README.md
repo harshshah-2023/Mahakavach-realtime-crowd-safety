@@ -106,8 +106,5 @@ This project was built to:
 - Serve as a high-quality engineering portfolio project
 
 ---
-
-## Disclaimer
-
-This is a **prototype and learning project**.  
-No real passenger data or live surveillance feeds are used.
+## Author 
+Harsh Shah
