@@ -4,7 +4,8 @@ import asyncio
 import json
 import random
 from datetime import datetime
-
+from app.state import user_signals
+from app.signal_logic import infer_trend
 
 class ConnectionManager:
     def __init__(self):
@@ -23,10 +24,30 @@ class ConnectionManager:
             await connection.send_text(json.dumps(message))
 
     async def broadcast_current_state(self):
+        enriched_state = {}
+
+        for station, data in crowd_state.items():
+            enriched_state[station] = {
+                "station_id": station,
+                "timestamp": data["timestamp"],
+                "coaches": {}
+            }
+
+            for coach, density in data["coaches"].items():
+                key = f"{station}:{coach}"
+                signals = list(user_signals[key])
+
+                enriched_state[station]["coaches"][coach] = {
+                    "density": density,
+                    "trend": infer_trend(signals)
+                }
+
         await self.broadcast({
             "type": "crowd_update",
-            "data": crowd_state
+            "data": enriched_state
         })
+
+
 
 
 manager = ConnectionManager()
