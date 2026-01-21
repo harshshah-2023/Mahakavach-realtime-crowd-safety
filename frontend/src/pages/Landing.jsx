@@ -1,281 +1,309 @@
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion"; // Install: npm install framer-motion
-import { 
-  ArrowRight, 
-  GitBranch, 
-  Cpu, 
-  BarChart3,
-  Shield,
-  Sparkles,
-  ChevronRight,
-  Clock,
-  TrendingUp,
-  MapPin
-} from "lucide-react"; // Install: npm install lucide-react
+import { motion } from "framer-motion";
+// import { Calendar, MapPin, ChevronDown, Search } from "lucide-react";
+import MahakavachAbout from "../components/MahakavachAbout";
+import PlatformStatusBanner from "../components/PlatformStatusBanner";
+import Community from "./Community";
+import CommunityBanner from "../components/CommunityBanner";
+import AwardsAndTimeline from "../components/AwardsAndTimeline";
+import SuburbanMap from "../components/SuburbanMap";
+// import Bannerimg from "../assets/Bannerimg";
+import BannerImg from "./../assets/BannerImg.png";
+import { useState } from "react";
+import { Calendar, MapPin, ChevronDown, Search, ArrowRight, Clock, Users } from "lucide-react";
 
-function Landing() {
+
+
+const tabs = [
+  { 
+    key: "book", 
+    label: "Identify Less Crowded Travel Options", 
+    tagline: "Plan Your Smooth Journey",
+    icon: Calendar 
+  },
+  { 
+    key: "pnr", 
+    label: "Station Crowd Status", 
+    tagline: "Check Platform Congestion",
+    icon: Search 
+  },
+  { 
+    key: "charts", 
+    label: "Check Coach Crowd Status", 
+    tagline: "View Coach-Level Crowd Distribution ",
+    icon: Users 
+  },
+  { 
+    key: "live", 
+    label: "Live Crowd Movement", 
+    tagline: "Get Crowd Movement Trend",
+    icon: Clock 
+  },
+];
+
+export default function Landing() {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("book");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0B0F14] via-[#0F172A] to-[#1E293B] text-white overflow-x-hidden">
+    <div className="w-full min-h-screen bg-gray-100 flex flex-col font-inter text-black">
       
-      {/* Animated Background Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
-      </div>
-
-      {/* NAVBAR */}
-      <motion.nav 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="fixed top-0 left-0 w-full z-50 backdrop-blur-lg bg-black/30 border-b border-white/10"
-      >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-2 text-2xl font-bold tracking-tight"
-          >
-            <div className="p-1.5 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg">
-              <Shield className="w-6 h-6" />
-            </div>
-            <span>Maha<span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Kavach</span></span>
-          </motion.div>
-          
-          <div className="hidden md:flex items-center gap-8">
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors group"
-            >
-              <Sparkles className="w-4 h-4 group-hover:text-blue-400" />
-              Demo
-            </motion.button>
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors group"
-            >
-              <Cpu className="w-4 h-4 group-hover:text-purple-400" />
-              Architecture
-            </motion.button>
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors group"
-            >
-              <BarChart3 className="w-4 h-4 group-hover:text-green-400" />
-              Roadmap
-            </motion.button>
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors group"
-            >
-              <GitBranch className="w-4 h-4 group-hover:text-orange-400" />
-              GitHub
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate("/demo")}
-              className="ml-4 px-6 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition-all shadow-lg shadow-blue-500/20"
-            >
-              Launch App
-            </motion.button>
-          </div>
-        </div>
-      </motion.nav>
+      {/* TOP NAV */}
+     
 
       {/* HERO SECTION */}
-      <section className="relative min-h-screen flex items-center pt-16">
-        <div className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
-          {/* LEFT CONTENT */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/10 border border-green-500/20 mb-8"
+      <div className="relative w-full h-[70vh] bg-cover bg-center flex items-end inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent"
+       style={{ backgroundImage: `url(${BannerImg})` }}
+      >
+        {/* Title layer */}
+        {/* <div className="absolute top-14 left-32 text-red-700 drop-shadow-2xl">
+          <div className="font-emirates text-5xl tracking-wide mb-2">Indian Railways</div>
+          <div className="text-lg font-bold tracking-widest uppercase">
+            Safety | Security | Punctuality
+          </div>
+        </div> */}
+
+        {/* Booking Card */}
+         <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3, duration: 0.6 }}
+      className="relative -mb-32 w-[90%] max-w-6xl mx-auto"
+    >
+      {/* Glassmorphic Card with Gradient Border */}
+      <div className="relative bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
+        {/* Gradient Accent Bar */}
+        <div className="absolute top-0 left-0 right-0 h-1 "></div>
+        
+        {/* Decorative Background Elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-red-500/5 to-orange-500/5 rounded-full blur-3xl -z-10"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-blue-500/5 to-purple-500/5 rounded-full blur-3xl -z-10"></div>
+
+        <div className="p-6 md:p-4">
+          {/* Header Section */}
+          <div className="mb-6">
+            <motion.h2 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-900 via-red-800 to-gray-900 bg-clip-text text-transparent mb-2"
             >
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
-                Phase 1 Live · Real-time Station Prediction
-              </span>
-            </motion.div>
+              {tabs.find(t => t.key === activeTab)?.tagline}
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+              className="text-gray-600 text-sm"
+            >
+              {activeTab === "book" && "Plan your commute using predicted crowd levels and train frequency data."}
+              {activeTab === "pnr" && "Monitor crowd conditions at selected stations before arrival."}
+              {activeTab === "charts" && "Access coach occupancy insights prior to boarding."}
+              {activeTab === "live" && "Track passenger flow patterns across station ."}
+            </motion.p>
+          </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-              <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-100 bg-clip-text text-transparent">
-                Predict Crowd
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">
-                Before It Forms
-              </span>
-            </h1>
-
-            <p className="mt-8 text-xl text-gray-300 leading-relaxed max-w-2xl">
-              MahaKavach leverages advanced AI to forecast crowd density across Mumbai's 
-              local train network using real-time schedules, historical patterns, and 
-              predictive analytics — enabling proactive decisions before congestion peaks.
-            </p>
-
-            {/* Stats */}
-            <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6">
-              <div className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
-                <div className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">99%</div>
-                <div className="text-sm text-gray-400 mt-1">Prediction Accuracy</div>
-              </div>
-              <div className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
-                <div className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">150+</div>
-                <div className="text-sm text-gray-400 mt-1">Stations Covered</div>
-              </div>
-              <div className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
-                <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-300 bg-clip-text text-transparent">24/7</div>
-                <div className="text-sm text-gray-400 mt-1">Real-time Updates</div>
-              </div>
-            </div>
-
-            <div className="mt-10 flex flex-wrap gap-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => navigate("/demo")}
-                className="group px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition-all shadow-lg shadow-blue-500/30 flex items-center gap-3"
-              >
-                <span className="font-semibold">View Live Demo</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all flex items-center gap-3"
-              >
-                <Cpu className="w-5 h-5" />
-                <span>View Architecture</span>
-              </motion.button>
-            </div>
-          </motion.div>
-
-          {/* PREDICTION CARD */}
-          <motion.div
-            initial={{ opacity: 0, x: 50, rotate: 2 }}
-            animate={{ opacity: 1, x: 0, rotate: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative"
-          >
-            {/* Floating elements */}
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-cyan-400/20 rounded-2xl blur-xl"></div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-tr from-purple-500/10 to-pink-400/10 rounded-3xl blur-xl"></div>
-
-            <div className="relative bg-gradient-to-br from-[#141821] to-[#0F172A] backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl shadow-black/50">
-              {/* Card Header */}
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <h3 className="text-2xl font-bold flex items-center gap-3">
-                    <div className="p-2 bg-gradient-to-br from-blue-500/20 to-cyan-400/20 rounded-lg">
-                      <TrendingUp className="w-6 h-6 text-blue-400" />
-                    </div>
-                    Crowd Predictor
-                  </h3>
-                  <p className="text-gray-400 text-sm mt-2">Real-time station analysis</p>
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-xs text-green-400">Live</span>
-                </div>
-              </div>
-
-              {/* Input Form */}
-              <div className="space-y-6">
-                <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-300 mb-2">
-                    <MapPin className="w-4 h-4 text-blue-400" />
-                    Train Line
-                  </label>
-                  <div className="relative group">
-                    <select className="w-full bg-[#0B0F14]/50 border border-white/10 rounded-xl px-4 py-3.5 text-base focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer appearance-none group-hover:border-white/30">
-                      <option className="bg-[#0F172A]">Harbour Line</option>
-                      <option className="bg-[#0F172A]" disabled>Central (Coming Soon)</option>
-                      <option className="bg-[#0F172A]" disabled>Western (Coming Soon)</option>
-                    </select>
-                    <ChevronRight className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 rotate-90 pointer-events-none" />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-300 mb-2">
-                    <MapPin className="w-4 h-4 text-cyan-400" />
-                    Station
-                  </label>
-                  <div className="relative group">
-                    <select className="w-full bg-[#0B0F14]/50 border border-white/10 rounded-xl px-4 py-3.5 text-base focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all cursor-pointer appearance-none group-hover:border-white/30">
-                      <option className="bg-[#0F172A]">Select Station</option>
-                      <option className="bg-[#0F172A]">CST (Chhatrapati Shivaji Terminus)</option>
-                      <option className="bg-[#0F172A]">Kurla Junction</option>
-                      <option className="bg-[#0F172A]">Vashi Station</option>
-                    </select>
-                    <ChevronRight className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 rotate-90 pointer-events-none" />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-300 mb-2">
-                    <Clock className="w-4 h-4 text-purple-400" />
-                    Time Window
-                  </label>
-                  <div className="relative group">
-                    <select className="w-full bg-[#0B0F14]/50 border border-white/10 rounded-xl px-4 py-3.5 text-base focus:outline-none focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20 transition-all cursor-pointer appearance-none group-hover:border-white/30">
-                      <option className="bg-[#0F172A]">Next 30 minutes</option>
-                      <option className="bg-[#0F172A]">Next 60 minutes</option>
-                      <option className="bg-[#0F172A]">Next 90 minutes</option>
-                    </select>
-                    <ChevronRight className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 rotate-90 pointer-events-none" />
-                  </div>
-                </div>
-
-                {/* Prediction Indicator */}
-                <div className="p-4 rounded-xl bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-sm text-gray-400">Predicted Crowd Level</div>
-                      <div className="text-2xl font-bold mt-1">Medium</div>
-                    </div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-500/20 to-orange-500/20 flex items-center justify-center border border-yellow-500/30">
-                      <div className="w-6 h-6 bg-yellow-500 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-
+          {/* Tab Navigation */}
+          <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2">
+            {tabs.map((tab, index) => {
+              const Icon = tab.icon;
+              return (
                 <motion.button
+                  key={tab.key}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm whitespace-nowrap transition-all duration-300 ${
+                    activeTab === tab.key
+                      ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg shadow-red-500/30 scale-105"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="hidden sm:inline">{tab.label}</span>
+                </motion.button>
+              );
+            })}
+          </div>
+
+          {/* Tab Content */}
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {activeTab === "book" && (
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+                  {/* From Station */}
+                  <div className="flex flex-col">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">origin Station</label>
+                    <div className="relative">
+                      <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-red-700" />
+                      <input 
+                        placeholder="Mumbai CST" 
+                        className="w-full pl-10 pr-3 py-3 bg-gray-50 border-2 border-gray-200 rounded-lg outline-none focus:border-red-500 focus:bg-white transition-all text-sm font-medium"
+                      />
+                    </div>
+                  </div>
+
+                  {/* To Station */}
+                 {/* To Station */}
+<div className="flex flex-col">
+  <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Destination Station </label>
+  <div className="relative">
+    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-red-500" />
+    <input 
+      placeholder="Panvel Junction"
+      className="w-full pl-10 pr-3 py-3 bg-gray-50 border-2 border-gray-200 rounded-lg outline-none focus:border-red-500 focus:bg-white transition-all text-sm font-medium"
+    />
+  </div>
+</div>
+
+                  {/* Travel Date */}
+                  <div className="flex flex-col">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Date of Travel</label>
+                    <div className="relative">
+                      <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-red-500" />
+                      <input 
+                        type="date" 
+                        className="w-full pl-10 pr-3 py-3 bg-gray-50 border-2 border-gray-200 rounded-lg outline-none focus:border-red-500 focus:bg-white transition-all text-sm font-medium"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Class */}
+                  <div className="flex flex-col">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Class</label>
+                    <div className="relative">
+                      <select className="w-full appearance-none px-3 py-3 bg-gray-50 border-2 border-gray-200 rounded-lg outline-none focus:border-red-500 focus:bg-white transition-all text-sm font-medium cursor-pointer">
+                        <option>All Classes</option>
+                        <option>General</option>
+                        <option>First Class</option>
+                        <option>AC Local</option>
+                      </select>
+                      <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Quota */}
+                  <div className="flex flex-col">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Quota</label>
+                    <div className="relative">
+                      <select className="w-full appearance-none px-3 py-3 bg-gray-50 border-2 border-gray-200 rounded-lg outline-none focus:border-red-500 focus:bg-white transition-all text-sm font-medium cursor-pointer">
+                        <option>General</option>
+                        <option>Ladies</option>
+                        <option>Fast Local</option>
+                        <option>Slow Local(Default)</option>
+                      </select>
+                      <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Search Button */}
+                <div className="flex justify-center pt-2">
+                  <motion.button 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="group flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-3.5 rounded-lg font-bold shadow-lg shadow-red-500/30 hover:shadow-xl hover:shadow-red-500/40 transition-all duration-300"
+                  >
+                    <Search className="w-4 h-4" />
+                    <span>View Travel Options</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </motion.button>
+                </div>
+              </div>
+            )}
+
+            {activeTab === "pnr" && (
+              <div className="flex flex-col md:flex-row gap-3">
+                <input
+                  placeholder="Enter Station"
+                  className="flex-1 px-5 py-3.5 bg-gray-50 border-2 border-gray-200 rounded-lg outline-none focus:border-red-500 focus:bg-white transition-all font-medium tracking-wider"
+                  maxLength="10"
+                />
+                <motion.button 
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition-all shadow-lg shadow-blue-500/30 font-semibold text-lg flex items-center justify-center gap-3 group"
+                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3.5 rounded-lg font-bold shadow-lg shadow-red-500/30 transition-all"
                 >
-                  <Sparkles className="w-5 h-5" />
-                  Generate Prediction
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <Search className="w-4 h-4" />
+                  Check Status
                 </motion.button>
+              </div>
+            )}
 
-                <div className="flex items-center gap-3 text-xs text-gray-500">
-                  <Shield className="w-4 h-4" />
-                  <span>Uses schedule and historical data only. No personal data collected.</span>
+            {activeTab === "charts" && (
+              <div className="space-y-4">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-4">
+                  <p className="text-gray-700 text-sm">
+                    Crowd Movement with vary with Stations.
+                  </p>
+                </div>
+                <div className="flex flex-col md:flex-row gap-3">
+                  <input 
+                    placeholder="Enter Train Number" 
+                    className="flex-1 px-5 py-3.5 bg-gray-50 border-2 border-gray-200 rounded-lg outline-none focus:border-red-500 focus:bg-white transition-all font-medium"
+                  />
+                  <motion.button 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3.5 rounded-lg font-bold shadow-lg shadow-red-500/30 transition-all"
+                  >
+                    <Users className="w-4 h-4" />
+                    Check Status
+                  </motion.button>
                 </div>
               </div>
-            </div>
+            )}
+
+            {activeTab === "live" && (
+              <div className="space-y-4">
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg p-4">
+                  <p className="text-gray-700 text-sm">
+                   Help the system by Update the Info for more accurate results.
+                  </p>
+                </div>
+                <div className="flex flex-col md:flex-row gap-3">
+                  <input 
+                    placeholder="Enter Train Number" 
+                    className="flex-1 px-5 py-3.5 bg-gray-50 border-2 border-gray-200 rounded-lg outline-none focus:border-red-500 focus:bg-white transition-all font-medium"
+                  />
+                  <motion.button 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3.5 rounded-lg font-bold shadow-lg shadow-red-500/30 transition-all"
+                  >
+                    <Clock className="w-4 h-4" />
+                    Track Live
+                  </motion.button>
+                </div>
+              </div>
+            )}
           </motion.div>
         </div>
-      </section>
+      </div>
+    </motion.div>
+      </div>
+
+      <div className="flex-1" />
+      <div className="mt-30">
+       <MahakavachAbout/>
+        <div className="mt-20 mb-20 ">
+       <PlatformStatusBanner/>
+       </div>
+       <div className="mt-20 mb-20">
+       <CommunityBanner/>
+       </div>
+        <div className="mt-20">
+       <AwardsAndTimeline/>
+       </div>
+       <SuburbanMap/>
+      </div>
+     
     </div>
   );
 }
-
-export default Landing;

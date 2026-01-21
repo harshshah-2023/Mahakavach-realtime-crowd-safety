@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@theme {
+  --font-emirates: "Georgia", "Times New Roman", serif;
+  --font-inter: "Inter", sans-serif;
+
+  --color-primary: #c30010;
+  --color-dark: #1a1a1a;
+}
+
+:root {
+  --primary: #c30010;
+  --gray-bg: #f7f7f7;
+  --gray-card: #f1f1f1;
+  --gray-border: #e2e2e2;
+  --dark: #1a1a1a;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
