@@ -12,7 +12,7 @@ export function useCrowdSocket() {
     mountedRef.current = true;
 
     if (!socket || socket.readyState === WebSocket.CLOSED) {
-      socket = new WebSocket("ws://127.0.0.1:8000/ws/crowd");
+      socket = new WebSocket("wss://mahakavach-backend.onrender.com/ws/crowd");
     }
 
     socket.onopen = () => {

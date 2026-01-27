@@ -8,8 +8,11 @@ export default function StationTrainsPage() {
 
   useEffect(() => {
     fetch(
-      `http://127.0.0.1:8000/api/v1/stations/${stationCode}/trains`
+      `https://mahakavach-backend.onrender.com/api/v1/stations/${stationCode}/trains`
     )
+    // (
+    //   `http://127.0.0.1:8000/api/v1/stations/${stationCode}/trains`
+    // )
       .then(res => res.json())
       .then(data => {
         setTrains(data.trains || []);
