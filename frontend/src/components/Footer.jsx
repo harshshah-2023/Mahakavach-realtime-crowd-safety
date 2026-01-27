@@ -1,19 +1,122 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Mail, Phone, Globe, Shield, AlertCircle, Users, TrendingUp } from "lucide-react";
+import { 
+  MapPin, 
+  Mail, 
+  Phone, 
+  Globe, 
+  Shield, 
+  AlertCircle, 
+  Users, 
+  TrendingUp,
+  ChevronDown,
+  ChevronUp,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+  Youtube,
+  MessageCircle
+} from "lucide-react";
 import logo from "../assets/llogo.png";
 
 export default function Footer() {
+  const [openSections, setOpenSections] = useState({});
+
+  const toggleSection = (section) => {
+    setOpenSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
+  const mobileSections = [
+    {
+      id: 'about',
+      title: 'About Us',
+      links: [
+        { label: 'About Us', to: '/about' },
+        { label: 'Careers', to: '/careers' },
+        { label: 'Media Centre', to: '/media' },
+        { label: 'Our Mission', to: '/mission' },
+        { label: 'Our Team', to: '/team' },
+        { label: 'Community', to: '/community' },
+      ]
+    },
+    {
+      id: 'platform',
+      title: 'Platform',
+      links: [
+        { label: 'Community Chat', to: '/community' },
+        { label: 'Platform Heatmap', to: '/crowd/platform' },
+        { label: 'Train Crowd Levels', to: '/crowd/train' },
+        { label: 'Upload Status', to: '/crowd/upload' },
+        { label: 'Live Alerts', to: '/alerts' },
+      ]
+    },
+    {
+      id: 'lines',
+      title: 'Rail Lines',
+      links: [
+        { label: 'Western Line', to: '/lines/western' },
+        { label: 'Central Line', to: '/lines/central' },
+        { label: 'Harbour Line', to: '/lines/harbour' },
+        { label: 'All Stations', to: '/stations' },
+        { label: 'Route Map', to: '/routes' },
+      ]
+    },
+    {
+      id: 'help',
+      title: 'Help',
+      links: [
+        { label: 'Help Center', to: '/help' },
+        { label: 'Travel Updates', to: '/updates' },
+        { label: 'FAQ', to: '/faq' },
+        { label: 'Safety Guidelines', to: '/safety' },
+      ]
+    },
+    {
+      id: 'resources',
+      title: 'Resources',
+      links: [
+        { label: 'Documentation', to: '/docs' },
+        { label: 'Privacy Policy', to: '/privacy' },
+        { label: 'Terms of Use', to: '/terms' },
+        { label: 'Cookie Policy', to: '/cookies' },
+        { label: 'Contact Us', to: '/contact' },
+      ]
+    }
+  ];
+
+  const socialLinks = [
+    { icon: <Facebook className="w-5 h-5 text-white" />, label: "Facebook", url: "#" },
+    { icon: <Twitter className="w-5 h-5 text-white" />, label: "Twitter", url: "#" },
+    { icon: <Linkedin className="w-5 h-5 text-white" />, label: "LinkedIn", url: "#" },
+    { icon: <Instagram className="w-5 h-5 text-white" />, label: "Instagram", url: "#" },
+    { icon: <Youtube className="w-5 h-5 text-white" />, label: "YouTube", url: "#" },
+    { icon: <MessageCircle className="w-5 h-5 text-white" />, label: "WhatsApp", url: "#" },
+  ];
+
   return (
     <footer className="w-full bg-gradient-to-b from-[#1a1a1a] to-[#0f0f0f] text-gray-300 select-none border-t border-[#2A2A2A] relative overflow-hidden">
       
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-red-600 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-600 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-red-600 rounded-full blur-2xl md:blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-56 md:w-80 h-56 md:h-80 bg-blue-600 rounded-full blur-2xl md:blur-3xl"></div>
       </div>
 
-      {/* HORIZONTAL RIBBON with LOGO - Left Side */}
-      <div className="absolute -left-2 top-20 w-52 h-32 bg-red-700 flex items-center justify-center shadow-2xl rounded-r-xl z-20 border-r-2 border-red-800 pl-4">
+      {/* MOBILE: Full width red ribbon with centered logo */}
+      <div className="md:hidden w-full bg-red-700 py-5 flex items-center justify-center z-20 relative shadow-xl">
+        <img
+          src={logo}
+          alt="MahaKavach Logo"
+          className="h-14 w-auto object-contain"
+        />
+      </div>
+
+      {/* DESKTOP: Left side ribbon with logo */}
+      <div className="hidden md:flex absolute -left-2 top-20 w-52 h-32 bg-red-700 items-center justify-center shadow-2xl rounded-r-xl z-20 border-r-2 border-red-800 pl-4">
         <img
           src={logo}
           alt="MahaKavach Logo"
@@ -21,9 +124,42 @@ export default function Footer() {
         />
       </div>
 
-      <div className="relative z-10 pt-20 pb-8 pl-6">
-        {/* TOP FOOTER */}
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 pb-12">
+      <div className="relative z-10 md:pt-20 pb-6 md:pb-8 pl-0 md:pl-6">
+        {/* MOBILE: Collapsible sections */}
+        <div className="md:hidden pt-2">
+          {mobileSections.map((section) => (
+            <div key={section.id} className="border-b border-[#2A2A2A]">
+              <button
+                onClick={() => toggleSection(section.id)}
+                className="w-full py-4 px-4 flex items-center justify-between text-white font-semibold text-base"
+              >
+                {section.title}
+                {openSections[section.id] ? (
+                  <ChevronUp className="w-5 h-5 text-white" />
+                ) : (
+                  <ChevronDown className="w-5 h-5 text-white" />
+                )}
+              </button>
+              
+              {openSections[section.id] && (
+                <div className="pb-4 px-4">
+                  {section.links.map((link, index) => (
+                    <Link
+                      key={index}
+                      to={link.to}
+                      className="block py-2 text-gray-400 hover:text-white transition-colors text-sm"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* DESKTOP: Original grid layout */}
+        <div className="hidden md:grid max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 pb-12">
           
           {/* BRAND - Takes 2 columns */}
           <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex flex-col gap-5">
@@ -134,11 +270,124 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* DIVIDER */}
-        <div className="w-full border-t border-[#2A2A2A] shadow-inner" />
+        {/* MOBILE: App Download Section */}
+        <div className="md:hidden px-4 py-6 border-b border-[#2A2A2A]">
+          <h3 className="text-white font-semibold text-lg mb-4">MahaKavach App</h3>
+          <p className="text-gray-400 text-sm mb-4">
+            Book and manage your safety on the go.
+          </p>
+          
+          <div className="flex flex-col gap-3">
+            <button className="w-full bg-black border border-gray-700 rounded-lg py-3 px-4 flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors">
+              <span className="text-white font-medium">Download on the App Store</span>
+            </button>
+            
+            <button className="w-full bg-black border border-gray-700 rounded-lg py-3 px-4 flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors">
+              <span className="text-white font-medium">GET IT ON Google Play</span>
+            </button>
+            
+            <button className="w-full bg-black border border-gray-700 rounded-lg py-3 px-4 flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors">
+              <span className="text-white font-medium">EXPLORE IT ON AppGallery</span>
+            </button>
+          </div>
+        </div>
 
-        {/* BOTTOM FOOTER */}
-        <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-8 gap-4">
+        {/* MOBILE: Social Media Section */}
+        <div className="md:hidden px-4 py-6 border-b border-[#2A2A2A]">
+          <h3 className="text-white font-semibold text-lg mb-4">Connect with us</h3>
+          <p className="text-gray-400 text-sm mb-4">
+            Share your MahaKavach experience.
+          </p>
+          
+          <div className="grid grid-cols-3 gap-3">
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.url}
+                className="flex flex-col items-center justify-center p-3 bg-[#1a1a1a] rounded-lg hover:bg-[#2a2a2a] transition-colors"
+              >
+                <div className="mb-1">
+                  {social.icon}
+                </div>
+                <span className="text-xs text-gray-300">{social.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* MOBILE: Newsletter Subscription */}
+        <div className="md:hidden px-4 py-6 border-b border-[#2A2A2A]">
+          <h3 className="text-white font-semibold text-lg mb-2">
+            Talk with the Developer 
+          </h3>
+          <p className="text-gray-400 text-sm mb-4">
+            write a message , will get response with 24 hrs
+          </p>
+          
+          <div className="flex gap-2 mb-2">
+            <input
+              type="email"
+              placeholder="Email address"
+              className="flex-1 bg-[#1a1a1a] border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500"
+            />
+            <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-lg font-medium transition-colors">
+              Subscribe
+            </button>
+          </div>
+          
+          <p className="text-xs text-gray-500">
+            Unsubscribe or change your preferences
+          </p>
+        </div>
+
+        {/* MOBILE: Contact Info */}
+        <div className="md:hidden px-4 py-6 border-b border-[#2A2A2A]">
+          <div className="space-y-3">
+            <div className="flex items-start gap-3">
+              <Mail className="w-4 h-4 text-white mt-1 flex-shrink-0" />
+              <span className="text-gray-300 text-sm">harshshah9848@gmail.com</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <Phone className="w-4 h-4 text-white mt-1 flex-shrink-0" />
+              <span className="text-gray-300 text-sm"></span>
+            </div>
+            <div className="flex items-start gap-3">
+              <MapPin className="w-4 h-4 text-white mt-1 flex-shrink-0" />
+              <span className="text-gray-300 text-sm">Mumbai, India</span>
+            </div>
+          </div>
+          
+          <button className="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors">
+            <AlertCircle className="w-5 h-5 text-white" />
+            Report Emergency
+          </button>
+        </div>
+
+        {/* MOBILE: Bottom Legal Links */}
+        <div className="md:hidden px-4 py-6">
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            {['Accessibility', 'Contact us', 'Privacy policy', 'Terms and conditions', 'Cookie Policy', 'Sitemap'].map((item) => (
+              <a
+                key={item}
+                href="#"
+                className="text-gray-500 text-xs hover:text-gray-300 transition-colors"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+          
+          <div className="text-center text-gray-500 text-xs">
+            <p className="mb-1">© {new Date().getFullYear()} MahaKavach. All Rights Reserved.</p>
+            <p>Built with ❤️ for Mumbai Commuters</p>
+          </div>
+        </div>
+
+        {/* DESKTOP: DIVIDER */}
+        <div className="hidden md:block w-full border-t border-[#2A2A2A] shadow-inner" />
+
+        {/* DESKTOP: BOTTOM FOOTER */}
+        <div className="hidden md:flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-8 gap-4">
 
           {/* COPYRIGHT */}
           <div className="flex flex-col md:flex-row items-center gap-2 text-xs text-gray-500 order-2 md:order-1">
