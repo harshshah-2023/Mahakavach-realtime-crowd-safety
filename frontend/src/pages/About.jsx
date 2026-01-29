@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import heroImg from "../assets/BannerImg.png"; // replace with your banner
 import aboutImg1 from "../assets/banner.png";   // commuter/crowd photo
 import aboutImg2 from "../assets/BannerImg.png";   // trains/platform safety
 
 export default function About() {
+   const navigate = useNavigate();
   return (
+   
     <div className="w-full min-h-screen bg-white text-dark font-inter select-none">
 
       {/* =================== CINEMATIC HERO =================== */}
@@ -184,14 +187,15 @@ export default function About() {
         </motion.h3>
 
         <motion.button
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="inline-flex items-center gap-3 bg-primary text-white px-9 py-3 rounded-md font-semibold tracking-wider hover:bg-red-700 transition"
-        >
-          Explore the Vision
-          <ChevronRight className="w-4 h-4" />
-        </motion.button>
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      onClick={() => navigate("vision")}
+      className="inline-flex items-center gap-3 bg-primary text-white px-9 py-3 rounded-md font-semibold tracking-wider hover:bg-red-700 transition"
+    >
+      Explore the Vision
+      <ChevronRight className="w-4 h-4" />
+    </motion.button>
       </section>
 
     </div>

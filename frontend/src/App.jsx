@@ -15,6 +15,7 @@ import StationTrainsPage from "./pages/StationTrainPage";
 import RushOverview from "./pages/RushOverview";
 import RushLineDetail from "./pages/RushLineDetail";
 import CrowdUpload from "./pages/CrowdUpload";
+import Vision from "./pages/Vision";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/about" element={<About/>}/>
          <Route path="/faq" element={<FAQ/>}/>
          <Route path="/help" element={<Help/>}/>
+         <Route path="/vision" element={<Vision />} />
         <Route path="/routepage" element={<RoutePage/>}/>
           {/* <Route path="/station/:id" element={<Station />} /> */}
            <Route path="/station/:stationCode" element={<StationPage />} />
