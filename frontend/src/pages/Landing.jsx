@@ -12,6 +12,7 @@ import BannerImg from "./../assets/BannerImg.png";
 import { useState } from "react";
 import { Calendar, MapPin, ChevronDown, Search, ArrowRight, Clock, Users } from "lucide-react";
 import { STATIONS } from "../data/stations";
+import About from "./About";
 
 
 
@@ -345,6 +346,9 @@ const goToStation = (station) => {
        </div>
        <SuburbanMap/>
       </div>
+       <div className="mt-12 sm:mt-16 md:mt-20">
+       <About/>
+       </div>
      
     </div>
   );

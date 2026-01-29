@@ -2,22 +2,34 @@ import { LINES } from "../data/lines";
 
 export default function Sidebar({ activeLine, setActiveLine }) {
   return (
-    <div className="h-full overflow-y-auto py-4 bg-gray-50 border-r border-gray-200">
-      <div className="px-3 mb-3 text-xs font-semibold text-gray-500">LINES</div>
-      
-      {LINES.map((line) => (
-        <button
-          key={line.id}
-          onClick={() => setActiveLine(line.id)}
-          className={`w-full text-left px-4 py-3 rounded-md mb-1 font-medium transition ${
-            activeLine === line.id
-              ? "bg-gray-900 text-white"
-              : "text-gray-800 hover:bg-gray-200"
-          }`}
-        >
-          {line.name}
-        </button>
-      ))}
+    <div className="h-full bg-white border-r border-gray-200 flex flex-col">
+
+      {/* Header */}
+      <div className="px-4 py-4 border-b font-semibold text-gray-800">
+        Community Lines
+      </div>
+
+      {/* Lines */}
+      <div className="flex-1 overflow-y-auto">
+        {LINES.map((line) => (
+          <button
+            key={line.id}
+            onClick={() => setActiveLine(line.id)}
+            className={`w-full flex items-center px-4 py-4 text-left transition ${
+              activeLine === line.id
+                ? "bg-gray-900 text-white"
+                : "hover:bg-gray-100 text-gray-800"
+            }`}
+          >
+            <div className="flex-1">
+              <div className="font-medium">{line.name}</div>
+              <div className="text-xs text-gray-500">
+                Live commuter chat
+              </div>
+            </div>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

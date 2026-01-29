@@ -133,11 +133,11 @@ export default function MahakavachAbout() {
             Choose the Least Crowded Train Before You Board
           </h2>
 
-          <p className="text-gray-600 mb-6 leading-relaxed text-sm">
+          <p className="text-gray-600 mb-6 leading-relaxed text-xl font-emirates">
             Mahakavach is a crowd intelligence system for Mumbai’s suburban rail
             network. It predicts crowd density at stations, trains, and individual
             coaches using schedules, delays, context signals, and privacy-safe
-            commuter inputs—helping travelers and operators act early.
+            commuter inputs , helping travelers and operators act early.
           </p>
          {/* <button
   onClick={() => navigate("/station/CSMT/trains")}
