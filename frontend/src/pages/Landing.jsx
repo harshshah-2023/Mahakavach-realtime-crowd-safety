@@ -90,10 +90,10 @@ const goToStation = (station) => {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3, duration: 0.6 }}
-      className="relative -mb-32 w-[90%] sm:w-[85%] max-w-6xl mx-auto px-4 sm:px-0"
+      className="relative -mb-26 w-[90%] sm:w-[85%] max-w-6xl mx-auto px-4 sm:px-0"
     >
       {/* Glassmorphic Card with Gradient Border */}
-      <div className="relative bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
+      <div className="relative bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden pb-2">
         {/* Gradient Accent Bar */}
         <div className="absolute top-0 left-0 right-0 h-1 "></div>
         
@@ -328,6 +328,8 @@ const goToStation = (station) => {
       </div>
     </motion.div>
       </div>
+      {/* RUSH HOURS CTA */}
+
 
       <div className="flex-1" />
       <div className="mt-20 sm:mt-24 md:mt-30">

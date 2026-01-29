@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import crowdpic from "../assets/crowdPic.png"
 import { useNavigate } from "react-router-dom";
+import station from "../assets/stationsx.png"
+import trainx from "../assets/trainsx.png"
+import crowdx from "../assets/crowdx.png"
+import talksx from "../assets/talksx.png"
 
 export default function MahakavachAbout() {
   const navigate = useNavigate();
@@ -10,29 +14,41 @@ export default function MahakavachAbout() {
   const cards = [
     {
       id: 0,
-      title: "Predictive Crowd Intelligence",
+      title: "LIVE movement Crowd at Mumabi Sub-urban Raliways",
       desc: "Crowd density predictions for trains, coaches & platforms before congestion forms.",
       num: "01",
+      route: "/rush-hours",
+      image: station
     },
     {
       id: 1,
-      title: "Coach-Level Safety Insights",
+      title: "At station? Update Mumbaikars abour Crowd",
       desc: "Context-aware risk indicators for women’s coaches using crowd, time & history.",
       num: "02",
+       route: "/contribute",
+        image: trainx
     },
     {
       id: 2,
-      title: "Real-Time Alerts & Signals",
+      title: "Talk to Mumbaikars Currently Travelling",
       desc: "Early crowd surge alerts for commuters and operators during peak conditions.",
       num: "03",
+       route: "/community",
+       image: talksx
+       
     },
     {
       id: 3,
-      title: "Operations & Emergency API",
+      title: "Check Rush at All the Stations",
       desc: "Reliable APIs for crowd trends, alerts, and emergency coordination.",
       num: "04",
+       route: "/Dashboard",
+         image: crowdx
     },
   ];
+  const handleCardClick = (route) => {
+    navigate(route);
+  };
 
   return (
     <section className="w-full bg-gray-100 py-20 px-6 md:px-16 lg:px-28 select-none mt-10">
@@ -49,14 +65,16 @@ export default function MahakavachAbout() {
               key={card.id}
               onMouseEnter={() => setHoverIndex(i)}
               onMouseLeave={() => setHoverIndex(null)}
+              onClick={() => handleCardClick(card.route)}
               animate={{
-                backgroundColor: isHighlighted ? "#c30010" : "#ffffff",
-                color: isHighlighted ? "#ffffff" : "#1a1a1a",
-                scale: isHighlighted ? 1.03 : 1,
-                boxShadow: isHighlighted
-                  ? "0px 10px 30px rgba(195,0,16,0.3)"
-                  : "0px 4px 12px rgba(0,0,0,0.06)",
-              }}
+  backgroundColor: isHighlighted ? "#D60201" : "#ffffff",
+  color: isHighlighted ? "#ffffff" : "#1a1a1a",
+  scale: isHighlighted ? 1.03 : 1,
+  boxShadow: isHighlighted
+    ? "0px 10px 30px rgba(214,2,1,0.35)"
+    : "0px 4px 12px rgba(0,0,0,0.06)",
+}}
+
               transition={{ duration: 0.25, ease: "easeOut" }}
               className="rounded-xl p-6 flex flex-col items-start border border-gray-200 cursor-pointer"
             >
@@ -75,6 +93,16 @@ export default function MahakavachAbout() {
               >
                 {card.desc}
               </p>
+              <div className="w-full h-40 overflow-hidden">
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="w-full h-full object-cover"
+                  style={{
+                    filter: isHighlighted ? "brightness(0.9)" : "brightness(1)"
+                  }}
+                />
+              </div>
             </motion.div>
           );
         })}
@@ -91,7 +119,7 @@ export default function MahakavachAbout() {
             className="w-full h-full object-cover"
           />
           <div className="absolute left-4 top-4 bg-primary text-white px-4 py-2 rounded-lg shadow-md text-sm font-semibold">
-            Mumbai Harbour Line – Phase 1
+            Travelling in Rush ? 
           </div>
         </div>
 

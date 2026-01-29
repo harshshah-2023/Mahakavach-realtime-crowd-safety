@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { 
   MapPin, 
   Mail, 
@@ -58,11 +59,11 @@ export default function Footer() {
       id: 'lines',
       title: 'Rail Lines',
       links: [
-        { label: 'Western Line', to: '/lines/western' },
-        { label: 'Central Line', to: '/lines/central' },
-        { label: 'Harbour Line', to: '/lines/harbour' },
+        { label: 'Western Line', to: 'rush-hours/western' },
+        { label: 'Central Line', to: '/rush-hours/central' },
+        { label: 'Harbour Line', to: 'rush-hours/harbour' },
         { label: 'All Stations', to: '/stations' },
-        { label: 'Route Map', to: '/routes' },
+        { label: 'Route Map', to: '/' },
       ]
     },
     {
@@ -89,12 +90,12 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { icon: <Facebook className="w-5 h-5 text-white" />, label: "Facebook", url: "#" },
-    { icon: <Twitter className="w-5 h-5 text-white" />, label: "Twitter", url: "#" },
-    { icon: <Linkedin className="w-5 h-5 text-white" />, label: "LinkedIn", url: "#" },
+    // { icon: <Facebook className="w-5 h-5 text-white" />, label: "Facebook", url: "#" },
+    { icon: <Twitter className="w-5 h-5 text-white" />, label: "Twitter", url: "https://x.com/HarshShah745967" },
+    { icon: <Linkedin className="w-5 h-5 text-white" />, label: "LinkedIn", url: "https://www.linkedin.com/in/harsh-shah-9848hs" },
     { icon: <Instagram className="w-5 h-5 text-white" />, label: "Instagram", url: "#" },
-    { icon: <Youtube className="w-5 h-5 text-white" />, label: "YouTube", url: "#" },
-    { icon: <MessageCircle className="w-5 h-5 text-white" />, label: "WhatsApp", url: "#" },
+    // { icon: <Youtube className="w-5 h-5 text-white" />, label: "YouTube", url: "#" },
+    { icon: <MessageCircle className="w-5 h-5 text-white" />, label: "GitHub", url: "https://github.com/harshshah-2023" },
   ];
 
   return (
@@ -102,12 +103,12 @@ export default function Footer() {
       
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-red-600 rounded-full blur-2xl md:blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-56 md:w-80 h-56 md:h-80 bg-blue-600 rounded-full blur-2xl md:blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-64 lg:w-96 h-64 lg:h-96 bg-red-600 rounded-full blur-2xl lg:blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-56 lg:w-80 h-56 lg:h-80 bg-blue-600 rounded-full blur-2xl lg:blur-3xl"></div>
       </div>
 
-      {/* MOBILE: Full width red ribbon with centered logo */}
-      <div className="md:hidden w-full bg-red-700 py-5 flex items-center justify-center z-20 relative shadow-xl">
+      {/* MOBILE & TABLET: Full width red ribbon with centered logo */}
+      <div className="lg:hidden w-full bg-red-700 py-5 flex items-center justify-center z-20 relative shadow-xl">
         <img
           src={logo}
           alt="MahaKavach Logo"
@@ -116,7 +117,7 @@ export default function Footer() {
       </div>
 
       {/* DESKTOP: Left side ribbon with logo */}
-      <div className="hidden md:flex absolute -left-2 top-20 w-52 h-32 bg-red-700 items-center justify-center shadow-2xl rounded-r-xl z-20 border-r-2 border-red-800 pl-4">
+      <div className="hidden lg:flex absolute -left-2 top-20 w-52 h-32 bg-red-700 items-center justify-center shadow-2xl rounded-r-xl z-20 border-r-2 border-red-800 pl-4">
         <img
           src={logo}
           alt="MahaKavach Logo"
@@ -124,9 +125,9 @@ export default function Footer() {
         />
       </div>
 
-      <div className="relative z-10 md:pt-20 pb-6 md:pb-8 pl-0 md:pl-6">
-        {/* MOBILE: Collapsible sections */}
-        <div className="md:hidden pt-2">
+      <div className="relative z-10 lg:pt-20 pb-6 lg:pb-8 pl-0 lg:pl-6">
+        {/* MOBILE & TABLET: Collapsible sections */}
+        <div className="lg:hidden pt-2">
           {mobileSections.map((section) => (
             <div key={section.id} className="border-b border-[#2A2A2A]">
               <button
@@ -159,7 +160,7 @@ export default function Footer() {
         </div>
 
         {/* DESKTOP: Original grid layout */}
-        <div className="hidden md:grid max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 pb-12">
+        <div className="hidden lg:grid max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 pb-12">
           
           {/* BRAND - Takes 2 columns */}
           <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex flex-col gap-5">
@@ -176,7 +177,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Users className="w-4 h-4 text-red-500" />
-                <span className="text-gray-300">12,000+ Active Users</span>
+                <span className="text-gray-300">LIVE Active Users</span>
               </div>
             </div>
 
@@ -215,9 +216,9 @@ export default function Footer() {
               Lines
             </h4>
             <div className="flex flex-col gap-2.5">
-              <FooterLink to="/lines/western" label="Western Line" />
-              <FooterLink to="/lines/central" label="Central Line" />
-              <FooterLink to="/lines/harbour" label="Harbour Line" />
+              <FooterLink to="/rush-hours/western" label="Western Line" />
+              <FooterLink to="/rush-hours/central" label="Central Line" />
+              <FooterLink to="/rush-hours/harbour" label="Harbour Line" />
               <FooterLink to="/stations" label="All Stations" />
               <FooterLink to="/routes" label="Route Map" />
             </div>
@@ -248,13 +249,13 @@ export default function Footer() {
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-3 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">
                 <Mail className="w-4 h-4 text-red-500 mt-[3px] flex-shrink-0" />
-                <span className="break-all">contact@mahakavach.in</span>
+                <span className="break-all">harshshah9848@gmail.com</span>
               </div>
 
-              <div className="flex items-start gap-3 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">
+              {/* <div className="flex items-start gap-3 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">
                 <Phone className="w-4 h-4 text-red-500 mt-[3px] flex-shrink-0" />
                 <span>+91 93215 56789</span>
-              </div>
+              </div> */}
 
               <div className="flex items-start gap-3 text-sm text-gray-400">
                 <MapPin className="w-4 h-4 text-red-500 mt-[3px] flex-shrink-0" />
@@ -270,8 +271,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* MOBILE: App Download Section */}
-        <div className="md:hidden px-4 py-6 border-b border-[#2A2A2A]">
+        {/* MOBILE & TABLET: App Download Section */}
+        <div className="lg:hidden px-4 py-6 border-b border-[#2A2A2A]">
           <h3 className="text-white font-semibold text-lg mb-4">MahaKavach App</h3>
           <p className="text-gray-400 text-sm mb-4">
             Book and manage your safety on the go.
@@ -292,8 +293,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* MOBILE: Social Media Section */}
-        <div className="md:hidden px-4 py-6 border-b border-[#2A2A2A]">
+        {/* MOBILE & TABLET: Social Media Section */}
+        <div className="lg:hidden px-4 py-6 border-b border-[#2A2A2A]">
           <h3 className="text-white font-semibold text-lg mb-4">Connect with us</h3>
           <p className="text-gray-400 text-sm mb-4">
             Share your MahaKavach experience.
@@ -315,8 +316,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* MOBILE: Newsletter Subscription */}
-        <div className="md:hidden px-4 py-6 border-b border-[#2A2A2A]">
+        {/* MOBILE & TABLET: Newsletter Subscription */}
+        <div className="lg:hidden px-4 py-6 border-b border-[#2A2A2A]">
           <h3 className="text-white font-semibold text-lg mb-2">
             Talk with the Developer 
           </h3>
@@ -340,17 +341,14 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* MOBILE: Contact Info */}
-        <div className="md:hidden px-4 py-6 border-b border-[#2A2A2A]">
+        {/* MOBILE & TABLET: Contact Info */}
+        <div className="lg:hidden px-4 py-6 border-b border-[#2A2A2A]">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <Mail className="w-4 h-4 text-white mt-1 flex-shrink-0" />
               <span className="text-gray-300 text-sm">harshshah9848@gmail.com</span>
             </div>
-            <div className="flex items-start gap-3">
-              <Phone className="w-4 h-4 text-white mt-1 flex-shrink-0" />
-              <span className="text-gray-300 text-sm"></span>
-            </div>
+           
             <div className="flex items-start gap-3">
               <MapPin className="w-4 h-4 text-white mt-1 flex-shrink-0" />
               <span className="text-gray-300 text-sm">Mumbai, India</span>
@@ -363,8 +361,8 @@ export default function Footer() {
           </button>
         </div>
 
-        {/* MOBILE: Bottom Legal Links */}
-        <div className="md:hidden px-4 py-6">
+        {/* MOBILE & TABLET: Bottom Legal Links */}
+        <div className="lg:hidden px-4 py-6">
           <div className="grid grid-cols-2 gap-3 mb-4">
             {['Accessibility', 'Contact us', 'Privacy policy', 'Terms and conditions', 'Cookie Policy', 'Sitemap'].map((item) => (
               <a
@@ -384,23 +382,26 @@ export default function Footer() {
         </div>
 
         {/* DESKTOP: DIVIDER */}
-        <div className="hidden md:block w-full border-t border-[#2A2A2A] shadow-inner" />
+        <div className="hidden lg:block w-full border-t border-[#2A2A2A] shadow-inner" />
 
         {/* DESKTOP: BOTTOM FOOTER */}
-        <div className="hidden md:flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-8 gap-4">
+        <div className="hidden lg:flex flex-col lg:flex-row items-center justify-between max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 py-8 gap-4">
 
           {/* COPYRIGHT */}
-          <div className="flex flex-col md:flex-row items-center gap-2 text-xs text-gray-500 order-2 md:order-1">
+          <div className="flex flex-col lg:flex-row items-center gap-2 text-xs text-gray-500 order-2 lg:order-1">
             <p>© {new Date().getFullYear()} MahaKavach. All rights reserved.</p>
-            <span className="hidden md:inline">•</span>
+            <span className="hidden lg:inline">•</span>
             <p>Built with ❤️ for Mumbai Commuters</p>
           </div>
 
+
+
+
           {/* SOCIAL LINKS */}
-          <div className="flex items-center gap-6 order-1 md:order-2">
-            <SocialButton label="Twitter" url="https://twitter.com" />
-            <SocialButton label="LinkedIn" url="https://linkedin.com" />
-            <SocialButton label="GitHub" url="https://github.com" />
+          <div className="flex items-center gap-6 order-1 lg:order-2">
+            <SocialButton label="Twitter" url="https://x.com/HarshShah745967" />
+            <SocialButton label="LinkedIn" url="https://www.linkedin.com/in/harsh-shah-9848hs" />
+            <SocialButton label="GitHub" url="https://github.com/harshshah-2023" />
             <SocialButton label="Instagram" url="https://instagram.com" />
           </div>
         </div>

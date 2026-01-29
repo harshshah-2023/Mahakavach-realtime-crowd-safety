@@ -12,7 +12,9 @@ import RoutePage from "./pages/RoutePage";
 import Station from "./pages/Station";
 import StationPage from "./pages/StationPage";
 import StationTrainsPage from "./pages/StationTrainPage";
-
+import RushOverview from "./pages/RushOverview";
+import RushLineDetail from "./pages/RushLineDetail";
+import CrowdUpload from "./pages/CrowdUpload";
 
 function App() {
   return (
@@ -38,6 +40,19 @@ function App() {
   path="/station/:stationCode/trains"
   element={<StationTrainsPage />}
 />
+    <Route path="/rush-hours" element={<RushOverview />} />
+        <Route path="/rush-hours/:line" element={<RushLineDetail />} />
+        <Route path="/contribute" element={<CrowdUpload />} />
+
+        {/* Optional: 404 fallback */}
+        <Route
+          path="*"
+          element={
+            <div className="p-10 text-center text-gray-500">
+              Page not found
+            </div>
+          }
+        />
       </Routes>
 
       <Footer/>
