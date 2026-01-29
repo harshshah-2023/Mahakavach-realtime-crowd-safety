@@ -61,27 +61,30 @@ export default function FAQ() {
     <div className="w-full min-h-screen bg-white text-dark font-inter select-none">
 
       {/* ===== HERO ===== */}
-      <section className="relative w-full h-[55vh] overflow-hidden flex items-end">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${faqHero})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/30" />
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-          className="relative z-10 px-8 md:px-16 lg:px-24 pb-20"
-        >
-          <p className="tracking-[0.25em] text-xs text-[#D4AF37] uppercase mb-3">
-            Help & Support
-          </p>
-          <h1 className="font-emirates text-4xl md:text-6xl text-white leading-tight">
-            Frequently Asked Questions
-          </h1>
-        </motion.div>
-      </section>
+   <section className="relative w-full h-[55vh] overflow-hidden flex items-end">
+  
+  {/* Premium Gray Gradient Background */}
+  <div className="absolute inset-0 bg-gradient-to-br from-[#1f1f1f] via-[#2a2a2a] to-[#3a3a3a]" />
+
+  {/* Subtle overlay for depth */}
+  <div className="absolute inset-0 bg-black/20" />
+
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.9 }}
+    className="relative z-10 px-8 md:px-16 lg:px-24 pb-20"
+  >
+    <p className="tracking-[0.25em] text-xs text-[#D4AF37] uppercase mb-3">
+      Help & Support
+    </p>
+
+    <h1 className="font-emirates text-4xl md:text-6xl text-white leading-tight">
+      Frequently Asked Questions
+    </h1>
+  </motion.div>
+</section>
+
 
       {/* ===== SEARCH BAR ===== */}
       <section className="py-14 px-6 md:px-16 lg:px-24 bg-white">

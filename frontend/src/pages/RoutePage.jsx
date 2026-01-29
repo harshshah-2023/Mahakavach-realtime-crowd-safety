@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import suburbanMap from "../assets/banner.png";
+// import suburbanMap from "../assets/banner.png";
+import mumbaimap from "../assets/mumbai-local-trains.jpg"
 import { TrainFront, MapPin } from "lucide-react";
 
 // Beginner-friendly rail info
@@ -48,15 +49,25 @@ export default function Route() {
     <section className="w-full bg-white select-none">
 
       {/* HERO */}
-      <div className="relative w-full h-[45vh] bg-black flex items-center justify-center overflow-hidden">
-        <img src={suburbanMap} alt="Mumbai Rail Map" className="absolute inset-0 w-full h-full object-cover opacity-50" />
-        <div className="relative z-10 text-center text-white">
-          <h1 className="text-4xl md:text-6xl font-serif tracking-wide">Mumbai Rail Routes</h1>
-          <p className="mt-3 text-sm md:text-base opacity-85">
-            Understand how Mumbai travels across its massive suburban rail network.
-          </p>
-        </div>
-      </div>
+     <div className="relative w-full h-[45vh] flex items-center justify-center overflow-hidden">
+
+  {/* Premium gray gradient background */}
+  <div className="absolute inset-0 bg-gradient-to-br from-[#141414] via-[#1f1f1f] to-[#2c2c2c]" />
+
+  {/* Subtle depth overlay */}
+  <div className="absolute inset-0 bg-black/25" />
+
+  <div className="relative z-10 text-center text-white px-6">
+    <h1 className="text-4xl md:text-6xl font-serif tracking-wide">
+      Mumbai Rail Routes
+    </h1>
+
+    <p className="mt-3 text-sm md:text-base text-white/85 max-w-2xl mx-auto">
+      Understand how Mumbai travels across its massive suburban rail network.
+    </p>
+  </div>
+</div>
+
 
       {/* OVERVIEW CARDS */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 px-6 py-16">
@@ -68,7 +79,7 @@ export default function Route() {
       {/* MAP */}
       <div className="w-full max-w-6xl mx-auto px-6 mb-16">
         <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-200">
-          <img src={suburbanMap} alt="Map" className="w-full object-cover hover:scale-[1.02] transition duration-500" />
+          <img src={mumbaimap} alt="Map" className="w-full object-cover hover:scale-[1.02] transition duration-500" />
         </div>
         <p className="text-xs text-gray-500 mt-2 text-center">Swipe/Zoom for details</p>
       </div>

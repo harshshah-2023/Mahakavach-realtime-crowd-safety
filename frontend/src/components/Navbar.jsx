@@ -22,16 +22,16 @@ export default function Navbar() {
           <div>
             <h3 className="font-semibold mb-3 text-sm sm:text-base">Crowd at Station</h3>
             <ul className="space-y-2 text-xs sm:text-sm text-gray-800">
-              <li><Link to="/book/search" onClick={() => setActiveTab(null)}>Crowd at Platform</Link></li>
+              <li><Link to="/Dashboard" onClick={() => setActiveTab(null)}>Crowd at Platform</Link></li>
               <li><Link to="/book/miles" onClick={() => setActiveTab(null)}>Crowd in Train</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="font-semibold mb-3 text-sm sm:text-base">Check Crowd at Line</h3>
             <ul className="space-y-2 text-xs sm:text-sm text-gray-800">
-              <li><Link to="/book/hotels" onClick={() => setActiveTab(null)}>Habour Line</Link></li>
-              <li><Link to="/book/car" onClick={() => setActiveTab(null)}>Central Line</Link></li>
-              <li><Link to="/book/insurance" onClick={() => setActiveTab(null)}>Western Line</Link></li>
+              <li><Link to="/rush-hours/harbour" onClick={() => setActiveTab(null)}>Habour Line</Link></li>
+              <li><Link to="/rush-hours/central" onClick={() => setActiveTab(null)}>Central Line</Link></li>
+              <li><Link to="/rush-hours/western" onClick={() => setActiveTab(null)}>Western Line</Link></li>
             </ul>
           </div>
           <div>
@@ -52,9 +52,9 @@ export default function Navbar() {
           <div>
             <h3 className="font-semibold mb-3 text-sm sm:text-base">Chat with Community</h3>
             <ul className="space-y-2 text-xs sm:text-sm text-gray-800">
-              <li><Link to="/manage/cancel" onClick={() => setActiveTab(null)}>Hourbour line</Link></li>
-              <li><Link to="/manage/change" onClick={() => setActiveTab(null)}>Central Line</Link></li>
-              <li><Link to="/manage/upgrade" onClick={() => setActiveTab(null)}>Western Line</Link></li>
+              <li><Link to="/community" onClick={() => setActiveTab(null)}>Hourbour line</Link></li>
+              <li><Link to="/community" onClick={() => setActiveTab(null)}>Central Line</Link></li>
+              <li><Link to="/community" onClick={() => setActiveTab(null)}>Western Line</Link></li>
             </ul>
           </div>
           <div>
@@ -74,9 +74,9 @@ export default function Navbar() {
           <div>
             <h3 className="font-semibold mb-3 text-sm sm:text-base">UPDATE CROWD AT LINE</h3>
             <ul className="space-y-2 text-xs sm:text-sm text-gray-800">
-              <li><Link to="/manage/cancel" onClick={() => setActiveTab(null)}>Hourbour line</Link></li>
-              <li><Link to="/manage/change" onClick={() => setActiveTab(null)}>Central Line</Link></li>
-              <li><Link to="/manage/upgrade" onClick={() => setActiveTab(null)}>Western Line</Link></li>
+              <li><Link to="/contribute" onClick={() => setActiveTab(null)}>Hourbour line</Link></li>
+              <li><Link to="/contribute" onClick={() => setActiveTab(null)}>Central Line</Link></li>
+              <li><Link to="/contribute" onClick={() => setActiveTab(null)}>Western Line</Link></li>
             </ul>
           </div>
           <div>

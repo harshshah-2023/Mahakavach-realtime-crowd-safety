@@ -25,8 +25,8 @@ const tabs = [
   // },
   { 
     key: "pnr", 
-    label: "Station Crowd Status", 
-    tagline: "Check Platform Congestion",
+    label: "Train Crowd", 
+    tagline: "Know the Rush in Trains Arriving at Your Station",
     icon: Search 
   },
   // { 
@@ -64,7 +64,10 @@ const handleStationChange = (value) => {
 const goToStation = (station) => {
   setStationQuery(station);
   setSuggestions([]);
-  navigate(`/station/${station}`);
+  navigate(`/station/${station}/trains`);
+
+  // fixing train problem
+  // navigate(`/station/${station}`);
 };
 
 
@@ -120,7 +123,7 @@ const goToStation = (station) => {
               className="text-gray-600 text-xs sm:text-sm"
             >
               {activeTab === "book" && "Plan your commute using predicted crowd levels and train frequency data."}
-              {activeTab === "pnr" && "Monitor crowd conditions at selected stations before arrival."}
+              {activeTab === "pnr" && "Know how crowded the incoming train is and plan your boarding better."}
               {activeTab === "charts" && "Access coach occupancy insights prior to boarding."}
               {activeTab === "live" && "Track passenger flow patterns across station ."}
             </motion.p>
@@ -265,7 +268,8 @@ const goToStation = (station) => {
     </div>
   )}
 </div>
-
+ {/* fixing the train problem 1// */}
+   {/* onClick={() => stationQuery && navigate(`/station/${stationQuery}`)} og */}
              <motion.button
   onClick={() => stationQuery && navigate(`/station/${stationQuery}`)}
   className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-lg text-sm sm:text-base font-semibold whitespace-nowrap"
