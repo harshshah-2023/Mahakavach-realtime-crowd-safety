@@ -13,6 +13,7 @@ import { useState } from "react";
 import { Calendar, MapPin, ChevronDown, Search, ArrowRight, Clock, Users } from "lucide-react";
 import { STATIONS } from "../data/stations";
 import About from "./About";
+import StationCrowdPanel from "../components/StationCrowdPanel";
 
 
 
@@ -29,12 +30,13 @@ const tabs = [
     tagline: "Know the Rush in Trains Arriving at Your Station",
     icon: Search 
   },
-  // { 
-  //   key: "charts", 
-  //   label: "Check Coach Crowd Status", 
-  //   tagline: "View Coach-Level Crowd Distribution ",
-  //   icon: Users 
-  // },
+  {
+  key: "charts",
+  label: "Station Crowd",
+  tagline: "View overall crowd status at a station",
+  icon: Users
+}
+
   // { 
   //   key: "live", 
   //   label: "Live Crowd Movement", 
@@ -48,6 +50,10 @@ export default function Landing() {
   const [activeTab, setActiveTab] = useState("pnr");
   const [stationQuery, setStationQuery] = useState("");
 const [suggestions, setSuggestions] = useState([]);
+
+const [stationCrowd, setStationCrowd] = useState(null);
+const [crowdLoading, setCrowdLoading] = useState(false);
+
 
 const handleStationChange = (value) => {
   setStationQuery(value);
@@ -69,6 +75,27 @@ const goToStation = (station) => {
   // fixing train problem
   // navigate(`/station/${station}`);
 };
+
+
+const fetchStationCrowd = async (station) => {
+  if (!station) return;
+
+  setCrowdLoading(true);
+  setStationCrowd(null);
+
+  try {
+    const res = await fetch(
+      `http://127.0.0.1:8000/api/v1/stations/${station}/crowd`
+    );
+    const data = await res.json();
+    setStationCrowd(data);
+  } catch (err) {
+    console.error("Failed to fetch station crowd", err);
+  } finally {
+    setCrowdLoading(false);
+  }
+};
+
 
 
   return (
@@ -281,29 +308,54 @@ const goToStation = (station) => {
               </div>
             )}
 
-            {activeTab === "charts" && (
-              <div className="space-y-4">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-3 sm:p-4">
-                  <p className="text-gray-700 text-xs sm:text-sm">
-                    Crowd Movement with vary with Stations.
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <input 
-                    placeholder="Enter Train Number" 
-                    className="flex-1 px-4 sm:px-5 py-3 sm:py-3.5 bg-gray-50 border-2 border-gray-200 rounded-lg outline-none focus:border-red-500 focus:bg-white transition-all font-medium text-sm sm:text-base"
-                  />
-                  <motion.button 
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-lg font-bold shadow-lg shadow-red-500/30 transition-all text-sm sm:text-base whitespace-nowrap"
-                  >
-                    <Users className="w-4 h-4" />
-                    Check Status
-                  </motion.button>
-                </div>
+{activeTab === "charts" && (
+  <div className="space-y-4">
+
+    <div className="flex flex-col sm:flex-row gap-3">
+      <div className="relative flex-1">
+        <input
+          value={stationQuery}
+          onChange={(e) => handleStationChange(e.target.value)}
+          placeholder="Enter Station Code (e.g. PNVL)"
+          className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-lg outline-none focus:border-red-500"
+        />
+
+        {suggestions.length > 0 && (
+          <div className="absolute z-50 mt-1 w-full bg-white border rounded-lg shadow-lg max-h-56 overflow-auto">
+            {suggestions.map((station) => (
+              <div
+                key={station}
+                onClick={() => {
+                  setStationQuery(station);
+                  setSuggestions([]);
+                }}
+                className="px-4 py-2 cursor-pointer hover:bg-red-50 text-sm"
+              >
+                {station}
               </div>
-            )}
+            ))}
+          </div>
+        )}
+      </div>
+
+      <motion.button
+        onClick={() =>
+          stationQuery &&
+          navigate(`/station-crowd/${stationQuery.toUpperCase()}`)
+        }
+        className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-lg font-semibold"
+      >
+        <Users className="w-4 h-4" />
+        View Station Crowd
+      </motion.button>
+    </div>
+
+    <p className="text-xs text-gray-500">
+      You’ll be redirected to a detailed station crowd view
+    </p>
+  </div>
+)}
+
 
             {activeTab === "live" && (
               <div className="space-y-4">

@@ -16,6 +16,9 @@ import RushOverview from "./pages/RushOverview";
 import RushLineDetail from "./pages/RushLineDetail";
 import CrowdUpload from "./pages/CrowdUpload";
 import Vision from "./pages/Vision";
+import StationCrowdSearch from "./pages/StationCrowdSearch";
+import StationCrowdPanel from "./components/StationCrowdPanel";
+import StationCrowdPage from "./pages/StationCrowdPage";
 
 function App() {
   return (
@@ -36,6 +39,14 @@ function App() {
          <Route path="/help" element={<Help/>}/>
          <Route path="/vision" element={<Vision />} />
         <Route path="/routepage" element={<RoutePage/>}/>
+        <Route path="/station-crowd" element={<StationCrowdSearch />} />
+        <Route path="/station-crowd/:stationCode" element={<StationCrowdPage />} />
+        {/* <Route
+  path="/station/:stationCode/crowd"
+  element={<StationCrowdPage />}
+/> */}
+
+
           {/* <Route path="/station/:id" element={<Station />} /> */}
            <Route path="/station/:stationCode" element={<StationPage />} />
            <Route
