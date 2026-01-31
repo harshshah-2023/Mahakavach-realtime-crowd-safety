@@ -7,7 +7,7 @@ export default function StationCrowdPage() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch(`http://mahakavach-backend.onrender.com/api/v1/stations/${stationCode}/crowd`)
+    fetch(`https://mahakavach-backend.onrender.com/api/v1/stations/${stationCode}/crowd`)
       .then(res => res.json())
       .then(setData);
   }, [stationCode]);

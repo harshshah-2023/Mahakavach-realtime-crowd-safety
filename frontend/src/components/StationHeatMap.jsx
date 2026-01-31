@@ -1,18 +1,23 @@
 import { HEAT_THEME } from "../utils/heatColors";
 import { useEffect, useState } from "react";
-import { 
-  TrendingUp, 
-  Clock, 
-  Users, 
+import {
+  TrendingUp,
+  Clock,
+  Users,
   AlertTriangle,
-  Thermometer,
-  Calendar,
-  BarChart3,
-  Info
+  Info,
+  ShieldCheck,
+  Activity
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+//  const navigate = useNavigate(); 
 
 export default function StationHeatMap({ density = "UNKNOWN" }) {
+   const navigate = useNavigate(); 
   const theme = HEAT_THEME[density] || HEAT_THEME.UNKNOWN;
+
+ 
   
   const pulseDuration = {
     VERY_LOW: "6s",
@@ -59,65 +64,53 @@ export default function StationHeatMap({ density = "UNKNOWN" }) {
   console.log("Theme color:", theme.base);
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-7xl mx-auto px-4 md:px-6 space-y-14">
       {/* Top Info Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200 shadow-sm">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-blue-700 font-medium">Current Status</span>
-            <Thermometer className="w-5 h-5 text-blue-600" />
-          </div>
-          <div className="flex items-center space-x-2">
-            <div 
-              className="w-3 h-3 rounded-full animate-pulse"
-              style={{ 
-                backgroundColor: theme.base,
-                animationDuration: pulseDuration
-              }}
-            />
-            <span className="text-2xl font-bold" style={{ color: theme.base }}>
-              {density.replace("_", " ")}
-            </span>
-          </div>
-          <p className="text-sm text-gray-600 mt-1">Updated {stationStats.lastUpdate}</p>
-        </div>
 
-        <div className="bg-gradient-to-r from-amber-50 to-amber-100 rounded-xl p-4 border border-amber-200 shadow-sm">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-amber-700 font-medium">Peak Hours</span>
-            <Clock className="w-5 h-5 text-amber-600" />
-          </div>
-          <div className="space-y-1">
-            {stationStats.peakHours.map((hour, idx) => (
-              <div key={idx} className="flex items-center text-sm">
-                <div className="w-2 h-2 rounded-full bg-amber-500 mr-2"></div>
-                <span className="font-medium">{hour}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* ================= HERO STATUS STRIP ================= */}
+      <div className="rounded-3xl border border-gray-200 bg-white shadow-sm px-8 py-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
 
-        <div className="bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-xl p-4 border border-emerald-200 shadow-sm">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-emerald-700 font-medium">Weekly Trend</span>
-            <TrendingUp className="w-5 h-5 text-emerald-600" />
-          </div>
-          <div className="flex items-center">
-            <BarChart3 className="w-5 h-5 text-emerald-500 mr-2" />
-            <span className="text-lg font-bold text-emerald-700">{stationStats.weeklyTrend}</span>
-          </div>
-          <p className="text-sm text-gray-600 mt-1">Compared to last week</p>
-        </div>
+          <div>
+            <p className="text-xs tracking-widest uppercase text-gray-400 mb-2">
+              Live Crowd Status
+            </p>
 
-        <div className="bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-4 border border-purple-200 shadow-sm">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-purple-700 font-medium">Dwell Time</span>
-            <Users className="w-5 h-5 text-purple-600" />
+            <div className="flex items-center gap-4">
+              <span
+                className="w-3 h-3 rounded-full"
+                style={{ backgroundColor: theme.base }}
+              />
+              <h1
+                className="text-3xl md:text-4xl font-semibold"
+                style={{ color: theme.base }}
+              >
+                {density.replace("_", " ")}
+              </h1>
+            </div>
+
+            <p className="text-sm text-gray-500 mt-3">
+              Last updated · {stationStats.lastUpdate}
+            </p>
           </div>
-          <div className="text-2xl font-bold text-purple-700">{stationStats.averageDwellTime}</div>
-          <p className="text-sm text-gray-600 mt-1">Average time spent in station</p>
+
+          <div className="flex gap-10 text-sm">
+            <div>
+              <p className="text-gray-400">Weekly trend</p>
+              <p className="font-semibold text-gray-900">
+                {stationStats.weeklyTrend}
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-400">Avg. dwell time</p>
+              <p className="font-semibold text-gray-900">
+                {stationStats.averageDwellTime}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+  
 
       {/* Main Station Map Container */}
       <div className="relative w-full max-w-5xl mx-auto bg-gradient-to-br from-gray-50 to-white rounded-2xl overflow-hidden shadow-2xl border border-gray-200 p-4 md:p-6">
@@ -367,90 +360,139 @@ export default function StationHeatMap({ density = "UNKNOWN" }) {
         </div>
       </div>
 
-      {/* Additional Info Panels */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Alerts Panel */}
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
-          <div className="flex items-center mb-4">
-            <AlertTriangle className="w-5 h-5 text-amber-500 mr-2" />
-            <h3 className="text-lg font-semibold text-gray-900">Live Alerts & Notices</h3>
-          </div>
-          <div className="space-y-3">
-            {stationStats.alerts.length > 0 ? (
-              stationStats.alerts.map((alert, idx) => (
-                <div key={idx} className="flex items-start p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                  <div className="w-2 h-2 bg-amber-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></div>
-                  <p className="text-sm text-amber-800">{alert}</p>
-                </div>
-              ))
-            ) : (
-              <div className="text-center py-4">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                </div>
-                <p className="text-gray-600">No active alerts. Station operating normally.</p>
-              </div>
-            )}
-            <div className="pt-3 border-t border-gray-100">
-              <p className="text-xs text-gray-500">Last checked: {stationStats.lastUpdate}</p>
-            </div>
-          </div>
-        </div>
+ <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
-        {/* Facilities Panel */}
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
-          <div className="flex items-center mb-4">
-            <div className="w-5 h-5 bg-blue-100 rounded flex items-center justify-center mr-2">
-              <svg className="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900">Available Facilities</h3>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            {stationStats.facilities.map((facility, idx) => (
-              <div key={idx} className="flex items-center p-3 bg-gray-50 rounded-lg">
-                <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                <span className="text-sm font-medium text-gray-700">{facility}</span>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <div className="flex items-center text-sm text-gray-600">
-              <Calendar className="w-4 h-4 mr-2" />
-              <span>All facilities open until 11:00 PM</span>
-            </div>
-          </div>
-        </div>
+  {/* PEAK WINDOWS */}
+  <div className="rounded-2xl border border-gray-200 bg-white px-6 py-6">
+    <div className="flex items-center gap-3 mb-4">
+      <Clock className="w-5 h-5 text-gray-500" />
+      <h3 className="text-sm font-semibold tracking-wide">
+        Typical Peak Windows
+      </h3>
+    </div>
 
-        {/* Recommendations Panel */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200 shadow-sm p-5">
-          <div className="flex items-center mb-4">
-            <div className="w-5 h-5 bg-blue-500 rounded flex items-center justify-center mr-2">
-              <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900">Smart Recommendations</h3>
-          </div>
-          <div className="space-y-3">
-            <div className="p-3 bg-white rounded-lg border border-blue-100">
-              <p className="text-sm text-gray-700 font-medium mb-1">Best time to travel</p>
-              <p className="text-xs text-gray-600">Consider traveling during non-peak hours (10:00 AM - 4:00 PM)</p>
-            </div>
-            <div className="p-3 bg-white rounded-lg border border-blue-100">
-              <p className="text-sm text-gray-700 font-medium mb-1">Fastest exit route</p>
-              <p className="text-xs text-gray-600">Use North Exit for quick access to parking and taxis</p>
-            </div>
-            <div className="p-3 bg-white rounded-lg border border-blue-100">
-              <p className="text-sm text-gray-700 font-medium mb-1">Alternative platforms</p>
-              <p className="text-xs text-gray-600">Platform 3 (East Wing) currently has lower crowd density</p>
-            </div>
-          </div>
+    <div className="space-y-3">
+      {stationStats.peakHours.map((h, i) => (
+        <div key={i} className="flex items-center gap-3">
+          <span className="w-1.5 h-1.5 bg-gray-500 rounded-full" />
+          <span className="text-sm text-gray-700">{h}</span>
         </div>
+      ))}
+    </div>
+
+    <p className="text-xs text-gray-400 mt-4">
+      Derived from historical congestion patterns
+    </p>
+  </div>
+
+  {/* SYSTEM CONFIDENCE */}
+  <div className="rounded-2xl border border-gray-200 bg-white px-6 py-6">
+    <div className="flex items-center gap-3 mb-4">
+      <ShieldCheck className="w-5 h-5 text-gray-500" />
+      <h3 className="text-sm font-semibold tracking-wide">
+        Signal Confidence
+      </h3>
+    </div>
+
+    <p className="text-sm text-gray-700 leading-relaxed">
+      Crowd levels are computed using real-time commuter inputs,
+      historical trends, and station telemetry.
+    </p>
+
+    <p className="text-xs text-gray-400 mt-4">
+      No personal or facial data is stored
+    </p>
+  </div>
+
+  {/* LIVE NOTICES */}
+  <div className="rounded-2xl border border-gray-200 bg-white px-6 py-6">
+    <div className="flex items-center gap-3 mb-4">
+      <AlertTriangle className="w-5 h-5 text-amber-500" />
+      <h3 className="text-sm font-semibold tracking-wide">
+        Live Notices
+      </h3>
+    </div>
+
+    {stationStats.alerts.length > 0 ? (
+      <div className="space-y-3">
+        {stationStats.alerts.map((a, i) => (
+          <div
+            key={i}
+            className="rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 text-sm text-amber-900"
+          >
+            {a}
+          </div>
+        ))}
       </div>
+    ) : (
+      <p className="text-sm text-gray-600">
+        No active advisories at this station.
+      </p>
+    )}
+  </div>
+
+  {/* ================= CONTRIBUTE CARD ================= */}
+<button
+  onClick={() => navigate("/contribute")}
+  className="
+    group text-left relative overflow-hidden
+    rounded-2xl border border-[#D4AF37]/40
+    bg-gradient-to-br from-white via-white to-[#FFF9E6]
+    px-6 py-6
+    transition-all duration-300
+    hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)]
+    hover:border-[#D4AF37]
+  "
+>
+  {/* subtle gold accent line */}
+  <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent bg-red-700" />
+
+  <div className="flex items-center gap-3 mb-4">
+    <div
+      className="
+        w-10 h-10 rounded-full
+        bg-[#B11226]
+        flex items-center justify-center
+        shadow-md
+      "
+    >
+      <Activity className="w-5 h-5 text-[#D4AF37] animate-pulse" />
+    </div>
+
+    <h3 className="text-sm font-semibold tracking-wide text-gray-900">
+      Update Crowd Status
+    </h3>
+  </div>
+
+  <p className="text-sm text-gray-700 leading-relaxed">
+    Are you currently at this station? Help fellow commuters by
+    sharing the latest crowd conditions.
+  </p>
+
+  <div className="mt-6 flex items-center justify-between">
+    <span className="text-xs text-gray-500">
+      Takes less than 10 seconds
+    </span>
+
+    <span
+      className="
+        text-sm font-semibold
+        text-[#B11226]
+        flex items-center gap-1
+        group-hover:text-[#8E0E1F]
+        transition
+      "
+    >
+      Contribute
+      <span className="transition-transform group-hover:translate-x-1">
+        →
+      </span>
+    </span>
+  </div>
+</button>
+
+</div>
+
 
       {/* Mobile instructions */}
       {isMobile && (
