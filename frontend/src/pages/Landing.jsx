@@ -85,7 +85,7 @@ const fetchStationCrowd = async (station) => {
 
   try {
     const res = await fetch(
-      `http://127.0.0.1:8000/api/v1/stations/${station}/crowd`
+      `http://mahakavach-backend.onrender.com/api/v1/stations/${station}/crowd`
     );
     const data = await res.json();
     setStationCrowd(data);
