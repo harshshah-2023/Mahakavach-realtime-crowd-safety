@@ -3,17 +3,17 @@ import { motion } from "framer-motion";
 // import { Calendar, MapPin, ChevronDown, Search } from "lucide-react";
 import MahakavachAbout from "../components/MahakavachAbout";
 import PlatformStatusBanner from "../components/PlatformStatusBanner";
-import Community from "./Community";
+// import Community from "./Community";
 import CommunityBanner from "../components/CommunityBanner";
 import AwardsAndTimeline from "../components/AwardsAndTimeline";
 import SuburbanMap from "../components/SuburbanMap";
 // import Bannerimg from "../assets/Bannerimg";
 import BannerImg from "./../assets/BannerImg.png";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Calendar, MapPin, ChevronDown, Search, ArrowRight, Clock, Users } from "lucide-react";
 import { STATIONS } from "../data/stations";
 import About from "./About";
-import StationCrowdPanel from "../components/StationCrowdPanel";
+// import StationCrowdPanel from "../components/StationCrowdPanel";
 
 
 
@@ -51,8 +51,8 @@ export default function Landing() {
   const [stationQuery, setStationQuery] = useState("");
 const [suggestions, setSuggestions] = useState([]);
 
-const [stationCrowd, setStationCrowd] = useState(null);
-const [crowdLoading, setCrowdLoading] = useState(false);
+// const [stationCrowd, setStationCrowd] = useState(null);
+// const [crowdLoading, setCrowdLoading] = useState(false);
 
 
 const handleStationChange = (value) => {
@@ -85,7 +85,7 @@ const fetchStationCrowd = async (station) => {
 
   try {
     const res = await fetch(
-      `http://mahakavach-backend.onrender.com/api/v1/stations/${station}/crowd`
+      `https://mahakavach-backend.onrender.com/api/v1/stations/${station}/crowd`
     );
     const data = await res.json();
     setStationCrowd(data);
@@ -95,6 +95,25 @@ const fetchStationCrowd = async (station) => {
     setCrowdLoading(false);
   }
 };
+
+useEffect(() => {
+    // Warm REST backend
+    fetch("https://mahakavach-backend.onrender.com/", {
+      method: "GET",
+      mode: "no-cors",
+    });
+
+    // Warm WebSocket backend
+    const ws = new WebSocket("wss://mahakavach-backend.onrender.com/ws/crowd");
+
+    ws.onopen = () => {
+      ws.close(); // immediately close after warm-up
+    };
+
+    ws.onerror = () => {
+      // silent fail — do nothing
+    };
+  }, []);
 
 
 
@@ -298,7 +317,7 @@ const fetchStationCrowd = async (station) => {
  {/* fixing the train problem 1// */}
    {/* onClick={() => stationQuery && navigate(`/station/${stationQuery}`)} og */}
              <motion.button
-  onClick={() => stationQuery && navigate(`/station/${stationQuery}`)}
+  onClick={() => stationQuery && navigate(`/station/${stationQuery}/trains`)}
   className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-lg text-sm sm:text-base font-semibold whitespace-nowrap"
 >
   <Search className="w-4 h-4" />

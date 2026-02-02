@@ -93,12 +93,12 @@ export default function StationTrainsPage() {
 
   return (
     <div className="p-6 pt-16">
-      <h1 className="text-2xl font-bold mb-4">
+      <h1 className="text-2xl font-bold mb-4 font-emirates">
         🚆 Trains arriving at {stationCode}
       </h1>
 
       {trains.length === 0 && (
-        <p className="text-gray-500">No trains in the next 30 minutes</p>
+        <p className="text-gray-500 font-emirates">No trains in the next 10 minutes</p>
       )}
 
       <div className="space-y-3">
