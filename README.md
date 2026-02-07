@@ -86,6 +86,54 @@ Each layer is decoupled to reflect production-style system design.
 
 ---
 
+Getting Started
+
+1️ Clone the Repository
+git clone https://github.com/your-username/mahakavach.git
+cd mahakavach
+
+2️ Frontend Setup
+cd frontend
+npm install
+npm run dev
+
+3️ Backend Setup
+cd backend
+npm install
+npm start
+
+ Environment Variables
+Backend
+DATABASE_URL=postgresql://user:password@host:port/db
+PORT=8000
+
+Frontend
+VITE_API_BASE_URL=https://mahakavach-backend.onrender.com
+VITE_WS_URL=wss://mahakavach-backend.onrender.com/ws/crowd
+
+⚠️ Known Limitations
+
+Real-time accuracy depends on data freshness
+Cold-start latency on free hosting tiers
+Crowd classification currently rule-based (ML-ready design)
+ Engineering Highlights
+
+Event-driven WebSocket architecture
+Stateless frontend with live state hydration
+Performance-first UX decisions
+Clean separation of concerns
+Scalable, city-level system design
+
+---
+
+ Planned Enhancements
+
+Machine learning-based crowd prediction
+IoT / camera-based crowd inputs
+Authority dashboards
+Offline-first mobile experience
+Multi-city support
+
 ## Project Status
 
 🚧 **MVP in active development**
