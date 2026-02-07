@@ -1,4 +1,4 @@
-# MahaKavach – Real-Time Safety Intelligence Platform
+# MahaKavach – Real-Time City-Scale Crowd Platform for Mumbai Suburban Railways      
 
 MahaKavach is a real-time crowd and safety intelligence platform designed for high-density public transport systems.  
 It uses computer vision, real-time streaming, and AI-assisted reporting to provide live crowd visibility, safety risk signals, and emergency workflows.
