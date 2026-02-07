@@ -5,6 +5,11 @@ It uses computer vision, real-time streaming, and AI-assisted reporting to provi
 
 The project focuses on **end-to-end system design** rather than UI polish, simulating how large-scale safety systems operate in real-world conditions.
 
+**LIVE**
+```
+https://www.mahakavach.in
+```
+
 ---
 
 ## Problem
