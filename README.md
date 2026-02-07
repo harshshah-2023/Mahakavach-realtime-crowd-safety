@@ -1,4 +1,4 @@
-# MahaKavach – Real-Time City-Scale Crowd Platform for Mumbai Suburban Railways      
+## MahaKavach – Real-Time City-Scale Crowd Platform for Mumbai Suburban Railways      
 
 MahaKavach is a real-time crowd and safety intelligence platform designed for high-density public transport systems.  
 It uses computer vision, real-time streaming, and AI-assisted reporting to provide live crowd visibility, safety risk signals, and emergency workflows.
@@ -160,5 +160,7 @@ This project was built to:
 - Serve as a high-quality engineering portfolio project
 
 ---
+<img width="1801" height="885" alt="Screenshot 2026-02-07 220851" src="https://github.com/user-attachments/assets/632b90d2-4d0c-4c86-8a5c-46535c59ef02" />
+
 ## Author 
 Harsh Shah
