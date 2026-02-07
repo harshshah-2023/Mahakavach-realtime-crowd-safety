@@ -47,8 +47,9 @@ MahaKavach treats crowd movement as a **live data stream** and converts it into 
 ---
 
 ## Architecture Overview
+```
 
-Video Input / Dataset
+Image Input / Dataset
 ↓
 YOLO Crowd Detection
 ↓
@@ -57,6 +58,7 @@ Density Aggregation
 FastAPI WebSocket Server
 ↓
 React Real-Time Dashboard
+```
 
 
 Each layer is decoupled to reflect production-style system design.
@@ -87,6 +89,7 @@ Each layer is decoupled to reflect production-style system design.
 ---
 
 Getting Started
+```
 
 1️ Clone the Repository
 git clone https://github.com/your-username/mahakavach.git
@@ -101,8 +104,10 @@ npm run dev
 cd backend
 npm install
 npm start
+```
 
  Environment Variables
+ ```
 Backend
 DATABASE_URL=postgresql://user:password@host:port/db
 PORT=8000
@@ -110,6 +115,7 @@ PORT=8000
 Frontend
 VITE_API_BASE_URL=https://mahakavach-backend.onrender.com
 VITE_WS_URL=wss://mahakavach-backend.onrender.com/ws/crowd
+```
 
 ⚠️ Known Limitations
 
