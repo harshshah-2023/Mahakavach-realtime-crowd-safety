@@ -89,18 +89,22 @@ Each layer is decoupled to reflect production-style system design.
 ---
 
 Getting Started
-```
+
 
 1️ Clone the Repository
+```
 git clone https://github.com/your-username/mahakavach.git
 cd mahakavach
-
+```
 2️ Frontend Setup
+```
 cd frontend
 npm install
 npm run dev
+```
 
 3️ Backend Setup
+```
 cd backend
 npm install
 npm start
