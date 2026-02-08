@@ -40,9 +40,13 @@ Yellow → Moderate congestion
 Red → High congestion / saturation risk
 3. Crowd state is continuously refreshed and pushed via WebSocket streams, enabling near real-time visibility across clients.
 4. Designed to function as a decision-support signal rather than raw data visualization.
+
+   
    
 - **Real-Time Dashboard**  
   WebSocket-powered dashboard showing live crowd heatmaps and train metadata.
+
+  
 
 - **Incoming Train Crowd Visibility**
 
@@ -50,6 +54,8 @@ Red → High congestion / saturation risk
 2. Enables commuters to make informed boarding decisions before train arrival, reducing last-minute congestion.
 3. Crowd signals are derived from aggregated station context and historical arrival patterns.
 4. System architecture is coach-level extensible, allowing future expansion without core redesign.
+
+
 
 - **Community Chat (Line-wise Communication Layer)**
 
@@ -64,6 +70,8 @@ Supports sharing of:
 -Platform or routing changes
 -Safety-related observations
 3. Designed as a human-in-the-loop feedback system to improve situational awareness in dynamic environments.
+
+
 
 - **Safety & Risk Indicators**
 
