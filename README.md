@@ -31,23 +31,49 @@ MahaKavach treats crowd movement as a **live data stream** and converts it into 
 
 ## Core Features
 
-- **Live Crowd Density Monitoring**  
-  Computer vision-based people counting with coach-level density estimation.
+- **Station Crowd Intelligence**
 
+1. Image-driven crowd density analysis using computer vision–based people detection (no live video streaming).
+2.  Real-time station congestion classification using traffic-style severity indicators:
+Green → Low congestion
+Yellow → Moderate congestion
+Red → High congestion / saturation risk
+3. Crowd state is continuously refreshed and pushed via WebSocket streams, enabling near real-time visibility across clients.
+4. Designed to function as a decision-support signal rather than raw data visualization.
+   
 - **Real-Time Dashboard**  
   WebSocket-powered dashboard showing live crowd heatmaps and train metadata.
 
-- **Women’s Safety Risk Scoring**  
-  Rule-based risk indicators using time, crowd density, and historical patterns.
+- **Incoming Train Crowd Visibility**
 
-- **Panic & Emergency Alerts**  
-  One-tap panic flow with train, coach, and location context.
+1. Provides pre-arrival crowd estimates for approaching trains at a given station.
+2. Enables commuters to make informed boarding decisions before train arrival, reducing last-minute congestion.
+3. Crowd signals are derived from aggregated station context and historical arrival patterns.
+4. System architecture is coach-level extensible, allowing future expansion without core redesign.
 
-- **AI Voice Complaint System (Prototype)**  
-  Converts short voice inputs into structured incident reports.
+- **Community Chat (Line-wise Communication Layer)**
 
-- **Offline-First Design**  
-  Supports limited functionality during low or no connectivity.
+1. Real-time, line-segmented communication channels for:
+-Western Line
+-Central Line
+-Harbour Line
+2. Acts as a distributed human-sensor network, complementing automated crowd signals.
+Supports sharing of:
+-Live crowd conditions
+-Delays and service disruptions
+-Platform or routing changes
+-Safety-related observations
+3. Designed as a human-in-the-loop feedback system to improve situational awareness in dynamic environments.
+
+- **Safety & Risk Indicators**
+
+1. Rule-based safety scoring engine combining:
+-Temporal factors (time of day)
+-Real-time crowd intensity
+-Station and line context
+2. Produces lightweight risk signals, not alerts, to avoid notification fatigue.
+3. Architecture is ML-ready, enabling seamless transition to predictive risk models as data maturity improves.
+4. Designed for integration into authority dashboards and incident workflows.
 
 ---
 
